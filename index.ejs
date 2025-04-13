@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mr Tech Session Generator</title>
+  <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>Mr Tech Session Generator</h1>
+
+    <% if (qrImage) { %>
+      <p>Scan this QR with WhatsApp:</p>
+      <img src="<%= qrImage %>" alt="QR Code" class="qr"/>
+    <% } else { %>
+      <p class="loading">Waiting for QR...</p>
+    <% } %>
+
+    <% if (sessionBase64) { %>
+      <div class="output">
+        <h2>Your Session ID</h2>
+        <textarea readonly><%= sessionBase64 %></textarea>
+        <button onclick="copySession()">Copy</button>
+      </div>
+    <% } %>
+  </div>
+
+  <footer>Powered by Mr Tech</footer>
+
+  <script>
+    function copySession() {
+      const textarea = document.querySelector("textarea");
+      textarea.select();
+      document.execCommand("copy");
+      alert("Session copied!");
+    }
+  </script>
+</body>
+</html>
